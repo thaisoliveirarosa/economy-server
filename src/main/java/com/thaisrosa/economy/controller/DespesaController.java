@@ -20,15 +20,15 @@ public class DespesaController {
 
     @GetMapping
     @ResponseBody
-    public List<Transacao> getAll() {
-        return transacaoService.getAllDespesa();
+    public List<Transacao> getAll(@RequestHeader("token") String token) {
+        return transacaoService.getAllDespesa(token);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Transacao> create(@RequestBody Transacao transacao) {
+    public ResponseEntity<Transacao> create(@RequestBody Transacao transacao, @RequestHeader("token") String token) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(transacaoService.createDespesa(transacao));
+                .body(transacaoService.createDespesa(transacao, token));
     }
 
     @DeleteMapping("/id")

@@ -19,15 +19,15 @@ public class ReceitaController {
 
     @GetMapping
     @ResponseBody
-    public List<Transacao> getAll() {
-        return transacaoService.getAllReceita();
+    public List<Transacao> getAll(@RequestHeader("token") String token) {
+        return transacaoService.getAllReceita(token);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Transacao> create(@RequestBody Transacao transacao) {
+    public ResponseEntity<Transacao> create(@RequestBody Transacao transacao, @RequestHeader("token") String token) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(transacaoService.createReceita(transacao));
+                .body(transacaoService.createReceita(transacao, token));
     }
 
     @DeleteMapping("/id")
